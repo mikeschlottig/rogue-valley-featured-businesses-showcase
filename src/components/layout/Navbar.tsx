@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Search, Menu } from 'lucide-react';
+import { Search, Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
+import { SearchDialog } from '@/components/ui/search-dialog';
+import { JoinDialog } from '@/components/ui/join-dialog';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 export function Navbar() {
   const location = useLocation();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [joinOpen, setJoinOpen] = useState(false);
   const navLinks = [
     { name: 'Categories', path: '/categories' },
     { name: 'The Valley', path: '/about' },
@@ -22,9 +34,9 @@ export function Navbar() {
           </Link>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
             {navLinks.map((link) => (
-              <Link 
+              <Link
                 key={link.path}
-                to={link.path} 
+                to={link.path}
                 className={cn(
                   "relative py-1 hover:text-rogue-accent transition-colors",
                   location.pathname === link.path ? "text-rogue-accent font-bold" : "text-rogue-green"
@@ -32,7 +44,7 @@ export function Navbar() {
               >
                 {link.name}
                 {location.pathname === link.path && (
-                  <motion.div 
+                  <motion.div
                     layoutId="nav-underline"
                     className="absolute -bottom-1 left-0 right-0 h-0.5 bg-rogue-accent rounded-full"
                   />
@@ -41,20 +53,62 @@ export function Navbar() {
             ))}
           </div>
           <div className="flex items-center gap-3">
-            <Button variant="ghost" size="icon" className="hidden sm:flex rounded-full">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hidden sm:flex rounded-full"
+              onClick={() => setSearchOpen(true)}
+            >
               <Search className="w-4 h-4" />
             </Button>
-            <Button className="bg-rogue-green hover:bg-rogue-green/90 text-white rounded-full px-6">
+            <Button 
+              className="bg-rogue-green hover:bg-rogue-green/90 text-white rounded-full px-6"
+              onClick={() => setJoinOpen(true)}
+            >
               Join Directory
             </Button>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <Menu className="w-5 h-5" />
-            </Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="md:hidden">
+                  <Menu className="w-5 h-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="bg-paper-cream border-l border-rogue-green/10">
+                <SheetHeader className="text-left mb-12">
+                  <SheetTitle className="font-serif text-3xl font-bold text-rogue-green">
+                    Menu
+                  </SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-8">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      className={cn(
+                        "text-2xl font-serif font-bold",
+                        location.pathname === link.path ? "text-rogue-accent" : "text-rogue-green"
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <div className="pt-8 border-t border-dashed border-rogue-green/20 flex flex-col gap-4">
+                    <Button 
+                      variant="outline" 
+                      className="sketchy-border py-6 text-lg justify-start gap-4"
+                      onClick={() => { setSearchOpen(true); }}
+                    >
+                      <Search className="w-5 h-5" /> Search the Valley
+                    </Button>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+      <JoinDialog open={joinOpen} onOpenChange={setJoinOpen} />
     </nav>
   );
 }
-// Simple internal motion wrapper for layout transitions in nav
-import { motion } from 'framer-motion';
