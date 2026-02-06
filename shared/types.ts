@@ -28,6 +28,8 @@ export interface Business {
     email: string;
   };
   isFeatured: boolean;
+  awardTitle?: string;
+  awardReason?: string;
 }
 export interface User {
   id: string;

@@ -48,7 +48,9 @@ export const MOCK_BUSINESSES: Business[] = [
       website: 'https://example.com/vineyard-loft',
       email: 'stay@vineyardloft.com'
     },
-    isFeatured: true
+    isFeatured: true,
+    awardTitle: 'Best Boutique Stay 2024',
+    awardReason: 'The Vineyard Loft offers an unmatched blend of architectural modernism and the organic beauty of the Applegate Valley. Their private harvest dinners are a revelation in local culinary craft.'
   },
   {
     id: 'biz2',
@@ -69,7 +71,9 @@ export const MOCK_BUSINESSES: Business[] = [
       website: 'https://example.com/sarah-miller',
       email: 'sarah@roguehomes.com'
     },
-    isFeatured: true
+    isFeatured: true,
+    awardTitle: 'Real Estate Leader 2024',
+    awardReason: 'Sarah Miller set a new standard for property presentation in Southern Oregon this year, combining tech-forward marketing with an old-school dedication to historic preservation.'
   },
   {
     id: 'biz3',
@@ -90,6 +94,8 @@ export const MOCK_BUSINESSES: Business[] = [
       website: 'https://example.com/valley-woodworks',
       email: 'elias@valleywoodworks.com'
     },
-    isFeatured: false
+    isFeatured: false,
+    awardTitle: 'Heritage Artisan of the Year',
+    awardReason: 'Valley Woodworks preserves the legacy of Rogue Valley craftsmanship. Their commitment to using 100% locally salvaged timber sets them apart as a leader in sustainable artisan luxury.'
   }
 ];

@@ -14,6 +14,8 @@ import '@/index.css'
 import { HomePage } from '@/pages/HomePage';
 import { CategoriesPage } from '@/pages/CategoriesPage';
 import { BusinessSpotlight } from '@/pages/BusinessSpotlight';
+import { BestOfPage } from '@/pages/BestOfPage';
+import { AboutPage } from '@/pages/AboutPage';
 import { PublicLayout } from '@/components/layout/PublicLayout';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -29,7 +31,12 @@ const router = createBrowserRouter([
   },
   {
     path: "/about",
-    element: <PublicLayout><div className="py-40 text-center font-serif text-3xl">Our Story is Coming Soon</div></PublicLayout>,
+    element: <PublicLayout><AboutPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/best-of",
+    element: <PublicLayout><BestOfPage /></PublicLayout>,
     errorElement: <RouteErrorBoundary />,
   },
   {

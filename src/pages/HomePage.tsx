@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const FEATURED_BUSINESSES = [
   {
     title: "The Vineyard Loft",
+    slug: "the-vineyard-loft",
     category: "Hospitality & Stay",
     description: "A luxury estate escape tucked in the heart of the Applegate Valley. Experience world-class hospitality.",
     image: "https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=800",
@@ -12,6 +13,7 @@ const FEATURED_BUSINESSES = [
   },
   {
     title: "Sarah Miller Real Estate",
+    slug: "sarah-miller-real-estate",
     category: "Professional Services",
     description: "Helping families find their perfect home in Southern Oregon for over 15 years. Local expertise.",
     image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=800",
@@ -19,6 +21,7 @@ const FEATURED_BUSINESSES = [
   },
   {
     title: "Valley Woodworks",
+    slug: "valley-woodworks",
     category: "Artisans & Crafts",
     description: "Custom handcrafted furniture made from local Oregon oak and reclaimed materials.",
     image: "https://images.unsplash.com/photo-1622398905321-4235e128b9a1?auto=format&fit=crop&q=80&w=800",
@@ -38,7 +41,7 @@ export function HomePage() {
               Each week we highlight businesses making a significant impact on our local culture and economy.
             </p>
           </div>
-          <motion.button 
+          <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="font-hand text-xl text-rogue-accent underline underline-offset-8"
@@ -69,7 +72,7 @@ export function HomePage() {
           <div className="space-y-8">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-rogue-green">The High-End Way to Connect.</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Standard directories are cluttered and noisy. We take an editorial approach, treat every business 
+              Standard directories are cluttered and noisy. We take an editorial approach, treat every business
               like a feature story, and ensure the quality of your brand is reflected in how you are discovered.
             </p>
             <ul className="space-y-4">
@@ -88,9 +91,9 @@ export function HomePage() {
           </div>
           <div className="relative">
              <div className="aspect-square bg-paper-cream sketchy-border overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-500">
-               <img 
-                 src="https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?auto=format&fit=crop&q=80&w=800" 
-                 alt="The Valley Landscape" 
+               <img
+                 src="https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?auto=format&fit=crop&q=80&w=800"
+                 alt="The Valley Landscape"
                  className="w-full h-full object-cover grayscale opacity-80"
                />
              </div>
