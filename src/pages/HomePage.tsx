@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { api } from '@/lib/api-client';
 import type { Business } from '@shared/types';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Link } from 'react-router-dom';
 export function HomePage() {
   const [featured, setFeatured] = useState<Business[]>([]);
   const [loading, setLoading] = useState(true);
@@ -29,13 +30,15 @@ export function HomePage() {
                 Each week we highlight businesses making a significant impact on our local culture and economy.
               </p>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="font-hand text-xl text-rogue-accent underline underline-offset-8"
-            >
-              Discover all businesses
-            </motion.button>
+            <Link to="/categories">
+              <motion.span
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="font-hand text-xl text-rogue-accent underline underline-offset-8 inline-block cursor-pointer"
+              >
+                Discover all businesses
+              </motion.span>
+            </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {loading ? (
@@ -55,7 +58,7 @@ export function HomePage() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <FeatureCard 
+                  <FeatureCard
                     title={biz.title}
                     category={biz.categorySlug.replace('-', ' ')}
                     image={biz.heroImage}

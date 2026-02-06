@@ -17,10 +17,15 @@ export function Navbar() {
   const location = useLocation();
   const [searchOpen, setSearchOpen] = useState(false);
   const [joinOpen, setJoinOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
   }, []);
+  // Close mobile menu when location changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
   const navLinks = [
     { name: 'Categories', path: '/categories' },
     { name: 'Events', path: '/events' },
@@ -74,7 +79,7 @@ export function Navbar() {
               >
                 Join
               </Button>
-              <Sheet>
+              <Sheet open={isMenuOpen} onOpenChange={setIsMenuOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="md:hidden">
                     <Menu className="w-5 h-5" />
@@ -91,6 +96,7 @@ export function Navbar() {
                       <Link
                         key={link.path}
                         to={link.path}
+                        onClick={() => setIsMenuOpen(false)}
                         className={cn(
                           "text-2xl font-serif font-bold",
                           location.pathname === link.path ? "text-rogue-accent" : "text-rogue-green"
@@ -103,7 +109,10 @@ export function Navbar() {
                       <Button
                         variant="outline"
                         className="w-full sketchy-border py-6 text-lg justify-start gap-4"
-                        onClick={() => setSearchOpen(true)}
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          setSearchOpen(true);
+                        }}
                       >
                         <Search className="w-5 h-5" /> Search
                       </Button>
@@ -115,7 +124,6 @@ export function Navbar() {
           </div>
         </div>
       </nav>
-      {/* Dialogs outside of nav structure to avoid portal nesting issues */}
       <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
       <JoinDialog open={joinOpen} onOpenChange={setJoinOpen} />
     </>

@@ -3,11 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { api } from '@/lib/api-client';
 import type { Category, Business } from '@shared/types';
 import { X, ArrowRight, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 export function CategoriesPage() {
+  const location = useLocation();
   const [categories, setCategories] = useState<Category[]>([]);
   const [businesses, setBusinesses] = useState<Business[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  // Close modal when location changes (navigating to business spotlight)
+  useEffect(() => {
+    setSelectedId(null);
+  }, [location.pathname]);
   useEffect(() => {
     api<Category[]>('/api/categories').then(setCategories);
     api<Business[]>('/api/businesses').then(setBusinesses);
@@ -31,7 +36,7 @@ export function CategoriesPage() {
             className="cursor-pointer group relative bg-white p-8 sketchy-border hover:shadow-xl transition-all h-64 flex flex-col justify-between overflow-hidden"
           >
             <div className="space-y-4">
-              <div 
+              <div
                 className="w-12 h-12 rounded-full flex items-center justify-center text-white"
                 style={{ backgroundColor: cat.color }}
               >
@@ -49,7 +54,7 @@ export function CategoriesPage() {
       <AnimatePresence>
         {selectedId && selectedCategory && (
           <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -60,7 +65,7 @@ export function CategoriesPage() {
               layoutId={selectedId}
               className="relative bg-paper-cream w-full max-w-4xl max-h-[90vh] overflow-y-auto sketchy-border p-8 md:p-12 shadow-2xl"
             >
-              <button 
+              <button
                 onClick={() => setSelectedId(null)}
                 className="absolute top-6 right-6 p-2 hover:bg-rogue-green/5 rounded-full transition-colors"
               >
@@ -75,21 +80,25 @@ export function CategoriesPage() {
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8">
-                  {categoryBusinesses.map((biz) => (
-                    <Link 
-                      key={biz.id} 
-                      to={`/business/${biz.slug}`}
-                      className="group p-6 bg-white border border-border rounded-xl hover:border-rogue-accent transition-all"
-                    >
-                      <h4 className="text-xl font-serif font-bold text-rogue-green group-hover:text-rogue-accent transition-colors">
-                        {biz.title}
-                      </h4>
-                      <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{biz.description}</p>
-                      <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-rogue-accent opacity-0 group-hover:opacity-100 transition-all">
-                        View Spotlight <ArrowRight className="w-4 h-4" />
-                      </div>
-                    </Link>
-                  ))}
+                  {categoryBusinesses.length > 0 ? (
+                    categoryBusinesses.map((biz) => (
+                      <Link
+                        key={biz.id}
+                        to={`/business/${biz.slug}`}
+                        className="group p-6 bg-white border border-border rounded-xl hover:border-rogue-accent transition-all"
+                      >
+                        <h4 className="text-xl font-serif font-bold text-rogue-green group-hover:text-rogue-accent transition-colors">
+                          {biz.title}
+                        </h4>
+                        <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{biz.description}</p>
+                        <div className="mt-4 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-rogue-accent opacity-0 group-hover:opacity-100 transition-all">
+                          View Spotlight <ArrowRight className="w-4 h-4" />
+                        </div>
+                      </Link>
+                    ))
+                  ) : (
+                    <p className="text-muted-foreground italic col-span-2">More businesses coming soon to this sector.</p>
+                  )}
                 </div>
               </div>
             </motion.div>

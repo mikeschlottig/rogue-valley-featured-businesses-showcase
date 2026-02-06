@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 export function AboutPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,9 +94,11 @@ export function AboutPage() {
             embodies the excellence of the valley, we want to hear from you.
           </p>
           <div className="pt-8">
-            <button className="bg-rogue-accent hover:bg-rogue-accent/90 text-white px-12 py-5 rounded-2xl text-xl font-bold transition-all flex items-center gap-3 mx-auto">
-              Get in Touch <ArrowRight className="w-6 h-6" />
-            </button>
+            <Link to="/submit">
+              <button className="bg-rogue-accent hover:bg-rogue-accent/90 text-white px-12 py-5 rounded-2xl text-xl font-bold transition-all flex items-center gap-3 mx-auto">
+                Get in Touch <ArrowRight className="w-6 h-6" />
+              </button>
+            </Link>
           </div>
         </section>
       </div>

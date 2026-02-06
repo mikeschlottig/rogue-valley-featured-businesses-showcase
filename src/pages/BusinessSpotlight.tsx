@@ -5,10 +5,12 @@ import type { Business } from '@shared/types';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Phone, Mail, Globe, MapPin, CheckCircle2 } from 'lucide-react';
+import { toast } from 'sonner';
 export function BusinessSpotlight() {
   const { slug } = useParams<{ slug: string }>();
   const [business, setBusiness] = useState<Business | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
   useEffect(() => {
     if (slug) {
       api<Business>(`/api/businesses/${slug}`)
@@ -17,6 +19,17 @@ export function BusinessSpotlight() {
         .finally(() => setLoading(false));
     }
   }, [slug]);
+  const handleSendMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    // Simulate API call
+    setTimeout(() => {
+      setSending(false);
+      toast.success('Inquiry sent! A Valley representative will contact you shortly.', {
+        description: `Your message to ${business?.title} was delivered successfully.`,
+      });
+    }, 1000);
+  };
   if (loading) return <div className="py-40 text-center font-hand text-2xl">Loading the spotlight...</div>;
   if (!business) return <div className="py-40 text-center">Business not found</div>;
   return (
@@ -100,10 +113,14 @@ export function BusinessSpotlight() {
               </div>
               <div className="pt-8 border-t border-white/10 space-y-4">
                 <p className="font-hand text-lg">Send a direct inquiry:</p>
-                <input className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="Your Name" />
-                <input className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="Your Email" />
-                <textarea className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm h-32 focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="How can we help?" />
-                <Button className="w-full bg-rogue-accent hover:bg-rogue-accent/90 text-white rounded-xl py-6 text-lg">Send Message</Button>
+                <form onSubmit={handleSendMessage} className="space-y-4">
+                  <input required className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="Your Name" />
+                  <input required type="email" className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="Your Email" />
+                  <textarea required className="w-full bg-white/5 border border-white/20 rounded-lg p-3 text-sm h-32 focus:outline-none focus:ring-1 focus:ring-rogue-accent" placeholder="How can we help?" />
+                  <Button disabled={sending} type="submit" className="w-full bg-rogue-accent hover:bg-rogue-accent/90 text-white rounded-xl py-6 text-lg">
+                    {sending ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
               </div>
             </div>
           </aside>
