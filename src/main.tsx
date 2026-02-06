@@ -12,6 +12,8 @@ import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { RouteErrorBoundary } from '@/components/RouteErrorBoundary';
 import '@/index.css'
 import { HomePage } from '@/pages/HomePage';
+import { CategoriesPage } from '@/pages/CategoriesPage';
+import { BusinessSpotlight } from '@/pages/BusinessSpotlight';
 import { PublicLayout } from '@/components/layout/PublicLayout';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -22,17 +24,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/categories",
-    element: <PublicLayout><div className="py-20 text-center">Categories Coming Soon</div></PublicLayout>,
+    element: <PublicLayout><CategoriesPage /></PublicLayout>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/about",
-    element: <PublicLayout><div className="py-20 text-center">About Us Coming Soon</div></PublicLayout>,
+    element: <PublicLayout><div className="py-40 text-center font-serif text-3xl">Our Story is Coming Soon</div></PublicLayout>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/business/:slug",
-    element: <PublicLayout><div className="py-20 text-center">Business Profile Coming Soon</div></PublicLayout>,
+    element: <PublicLayout><BusinessSpotlight /></PublicLayout>,
     errorElement: <RouteErrorBoundary />,
   },
 ]);

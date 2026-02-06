@@ -1,41 +1,43 @@
-/**
- * Minimal real-world demo: One Durable Object instance per entity (User, ChatBoard), with Indexes for listing.
- */
 import { IndexedEntity } from "./core-utils";
-import type { User, Chat, ChatMessage } from "@shared/types";
-import { MOCK_CHAT_MESSAGES, MOCK_CHATS, MOCK_USERS } from "@shared/mock-data";
-
-// USER ENTITY: one DO instance per user
-export class UserEntity extends IndexedEntity<User> {
-  static readonly entityName = "user";
-  static readonly indexName = "users";
-  static readonly initialState: User = { id: "", name: "" };
-  static seedData = MOCK_USERS;
+import type { Category, Business } from "@shared/types";
+import { MOCK_CATEGORIES, MOCK_BUSINESSES } from "@shared/mock-data";
+export class CategoryEntity extends IndexedEntity<Category> {
+  static readonly entityName = "category";
+  static readonly indexName = "categories";
+  static readonly initialState: Category = { 
+    id: "", 
+    slug: "", 
+    name: "", 
+    description: "", 
+    icon: "", 
+    color: "" 
+  };
+  static seedData = MOCK_CATEGORIES;
 }
-
-// CHAT BOARD ENTITY: one DO instance per chat board, stores its own messages
-export type ChatBoardState = Chat & { messages: ChatMessage[] };
-
-const SEED_CHAT_BOARDS: ChatBoardState[] = MOCK_CHATS.map(c => ({
-  ...c,
-  messages: MOCK_CHAT_MESSAGES.filter(m => m.chatId === c.id),
-}));
-
-export class ChatBoardEntity extends IndexedEntity<ChatBoardState> {
-  static readonly entityName = "chat";
-  static readonly indexName = "chats";
-  static readonly initialState: ChatBoardState = { id: "", title: "", messages: [] };
-  static seedData = SEED_CHAT_BOARDS;
-
-  async listMessages(): Promise<ChatMessage[]> {
-    const { messages } = await this.getState();
-    return messages;
-  }
-
-  async sendMessage(userId: string, text: string): Promise<ChatMessage> {
-    const msg: ChatMessage = { id: crypto.randomUUID(), chatId: this.id, userId, text, ts: Date.now() };
-    await this.mutate(s => ({ ...s, messages: [...s.messages, msg] }));
-    return msg;
+export class BusinessEntity extends IndexedEntity<Business> {
+  static readonly entityName = "business";
+  static readonly indexName = "businesses";
+  static readonly initialState: Business = {
+    id: "",
+    slug: "",
+    title: "",
+    categorySlug: "",
+    description: "",
+    longDescription: "",
+    heroImage: "",
+    galleryImages: [],
+    features: [],
+    contactDetails: {
+      address: "",
+      phone: "",
+      website: "",
+      email: ""
+    },
+    isFeatured: false
+  };
+  static seedData = MOCK_BUSINESSES;
+  static async findBySlug(env: any, slug: string): Promise<Business | null> {
+    const { items } = await this.list(env);
+    return items.find(b => b.slug === slug) ?? null;
   }
 }
-
