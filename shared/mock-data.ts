@@ -1,4 +1,4 @@
-import type { Category, Business, User } from './types';
+import type { Category, Business, User, BlogPost, LocalEvent } from './types';
 export const MOCK_USERS: User[] = [
   { id: 'u1', name: 'Valley Curator' }
 ];
@@ -35,67 +35,84 @@ export const MOCK_BUSINESSES: Business[] = [
     title: 'The Vineyard Loft',
     categorySlug: 'hospitality',
     description: 'A luxury estate escape tucked in the heart of the Applegate Valley.',
-    longDescription: 'The Vineyard Loft offers an unparalleled experience of Southern Oregon’s wine country. Perched atop a rolling hill overlooking 40 acres of Pinot Noir vines, our loft combines modern architectural elegance with the rustic charm of the valley. Guests enjoy private tastings, sunset balcony views, and hand-delivered artisanal breakfasts.',
+    longDescription: 'The Vineyard Loft offers an unparalleled experience of Southern Oregon’s wine country. Perched atop a rolling hill overlooking 40 acres of Pinot Noir vines, our loft combines modern architectural elegance with the rustic charm of the valley.',
     heroImage: 'https://images.unsplash.com/photo-1544124499-58912cbddaad?auto=format&fit=crop&q=80&w=1200',
     galleryImages: [
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&q=80&w=800'
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&q=80&w=800'
     ],
-    features: ['Private Wine Tasting', 'Chef-prepared Breakfast', 'Panoramic Views', 'Luxury Linens'],
+    features: ['Private Wine Tasting', 'Chef-prepared Breakfast'],
     contactDetails: {
       address: '123 Applegate Rd, Jacksonville, OR',
       phone: '(541) 555-0123',
-      website: 'https://example.com/vineyard-loft',
+      website: 'https://example.com',
       email: 'stay@vineyardloft.com'
     },
     isFeatured: true,
     awardTitle: 'Best Boutique Stay 2024',
-    awardReason: 'The Vineyard Loft offers an unmatched blend of architectural modernism and the organic beauty of the Applegate Valley. Their private harvest dinners are a revelation in local culinary craft.'
+    awardReason: 'Unmatched blend of architectural modernism and organic beauty.'
   },
   {
     id: 'biz2',
     slug: 'sarah-miller-real-estate',
     title: 'Sarah Miller Real Estate',
     categorySlug: 'professional-services',
-    description: 'Helping families find their perfect home in Southern Oregon for over 15 years.',
-    longDescription: 'Sarah Miller is more than a real estate agent; she is a community guide. With a deep focus on historic properties in Ashland and luxury estates in Medford, Sarah utilizes a high-touch, editorial approach to property marketing. She believes every home has a story, and every buyer deserves a perfect chapter in the Rogue Valley.',
+    description: 'Finding perfect homes in Southern Oregon for over 15 years.',
+    longDescription: 'Sarah Miller is a community guide focusing on historic properties in Ashland and luxury estates in Medford.',
     heroImage: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=1200',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800'
-    ],
-    features: ['Luxury Market Expert', 'Historic Home Specialist', 'Concierge Service', 'Relocation Guide'],
+    galleryImages: [],
+    features: ['Luxury Market Expert', 'Historic Home Specialist'],
     contactDetails: {
       address: '456 Main St, Ashland, OR',
       phone: '(541) 555-0456',
-      website: 'https://example.com/sarah-miller',
+      website: 'https://example.com',
       email: 'sarah@roguehomes.com'
     },
     isFeatured: true,
     awardTitle: 'Real Estate Leader 2024',
-    awardReason: 'Sarah Miller set a new standard for property presentation in Southern Oregon this year, combining tech-forward marketing with an old-school dedication to historic preservation.'
+    awardReason: 'Set a new standard for property presentation in Southern Oregon.'
+  }
+];
+export const MOCK_BLOG_POSTS: BlogPost[] = [
+  {
+    id: 'p1',
+    slug: 'autumn-in-the-applegate',
+    title: 'Autumn in the Applegate: A Harvest Story',
+    excerpt: 'The colors are changing, and the harvest is in full swing. Discover the magic of fall in the valley.',
+    content: 'Fall in the Rogue Valley is a sensory symphony. The air turns crisp, the maples turn gold, and the vineyards buzz with the energy of the harvest. Local vintners are reporting an exceptional year for Pinot Noir...',
+    author: 'Elena Thorne',
+    date: 'Oct 12, 2024',
+    image: 'https://images.unsplash.com/photo-1506146332389-18140dc7b2fb?auto=format&fit=crop&q=80&w=800'
   },
   {
-    id: 'biz3',
-    slug: 'valley-woodworks',
-    title: 'Valley Woodworks',
-    categorySlug: 'artisans',
-    description: 'Custom handcrafted furniture made from local Oregon oak and reclaimed materials.',
-    longDescription: 'Founded by master woodworker Elias Thorne, Valley Woodworks specializes in live-edge dining tables and bespoke cabinetry. Every piece is sourced from fallen trees within a 50-mile radius of Medford. We celebrate the natural imperfections of the wood, creating legacy pieces that last generations.',
-    heroImage: 'https://images.unsplash.com/photo-1622398905321-4235e128b9a1?auto=format&fit=crop&q=80&w=1200',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?auto=format&fit=crop&q=80&w=800',
-      'https://images.unsplash.com/photo-1540633169354-e3954421df74?auto=format&fit=crop&q=80&w=800'
-    ],
-    features: ['Locally Sourced Wood', 'Hand-rubbed Finishes', 'Custom Commissions', 'Sustainable Practices'],
-    contactDetails: {
-      address: '789 Industry Way, Medford, OR',
-      phone: '(541) 555-0789',
-      website: 'https://example.com/valley-woodworks',
-      email: 'elias@valleywoodworks.com'
-    },
-    isFeatured: false,
-    awardTitle: 'Heritage Artisan of the Year',
-    awardReason: 'Valley Woodworks preserves the legacy of Rogue Valley craftsmanship. Their commitment to using 100% locally salvaged timber sets them apart as a leader in sustainable artisan luxury.'
+    id: 'p2',
+    slug: 'artisans-of-ashland',
+    title: 'The Hidden Artisans of Ashland',
+    excerpt: 'Beyond the theaters, Ashland hides a thriving community of world-class makers.',
+    content: 'Walk down any side street in Ashland and you might hear the hum of a lathe or the clinking of a pottery wheel. We spent a week visiting the studios of three local masters...',
+    author: 'James Medford',
+    date: 'Nov 02, 2024',
+    image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?auto=format&fit=crop&q=80&w=800'
+  }
+];
+export const MOCK_EVENTS: LocalEvent[] = [
+  {
+    id: 'e1',
+    title: 'Winter Wine Pavilion',
+    date: 'Dec 15, 2024',
+    venue: 'Medford Commons',
+    category: 'Festival',
+    description: 'A celebration of local winter releases and artisanal cheeses.',
+    price: '$45',
+    image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&q=80&w=800'
+  },
+  {
+    id: 'e2',
+    title: 'Ashland Maker Market',
+    date: 'Dec 20, 2024',
+    venue: 'Historic Downtown',
+    category: 'Shopping',
+    description: 'The premier holiday market for handcrafted Southern Oregon gifts.',
+    price: 'Free',
+    image: 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?auto=format&fit=crop&q=80&w=800'
   }
 ];

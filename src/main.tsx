@@ -16,6 +16,11 @@ import { CategoriesPage } from '@/pages/CategoriesPage';
 import { BusinessSpotlight } from '@/pages/BusinessSpotlight';
 import { BestOfPage } from '@/pages/BestOfPage';
 import { AboutPage } from '@/pages/AboutPage';
+import { FeaturedPage } from '@/pages/FeaturedPage';
+import { EventsPage } from '@/pages/EventsPage';
+import { BlogPage } from '@/pages/BlogPage';
+import { SubmitPage } from '@/pages/SubmitPage';
+import { AdvertisingPage, PrivacyPage, TermsPage } from '@/pages/LegalPages';
 import { PublicLayout } from '@/components/layout/PublicLayout';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -37,6 +42,41 @@ const router = createBrowserRouter([
   {
     path: "/best-of",
     element: <PublicLayout><BestOfPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/featured",
+    element: <PublicLayout><FeaturedPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/events",
+    element: <PublicLayout><EventsPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/blog",
+    element: <PublicLayout><BlogPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/submit",
+    element: <PublicLayout><SubmitPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/advertising",
+    element: <PublicLayout><AdvertisingPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/privacy",
+    element: <PublicLayout><PrivacyPage /></PublicLayout>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/terms",
+    element: <PublicLayout><TermsPage /></PublicLayout>,
     errorElement: <RouteErrorBoundary />,
   },
   {

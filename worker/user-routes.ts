@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import type { Env } from './core-utils';
 import { CategoryEntity, BusinessEntity } from "./entities";
 import { ok, notFound } from './core-utils';
+import { MOCK_BLOG_POSTS, MOCK_EVENTS } from "../shared/mock-data";
 export function userRoutes(app: Hono<{ Bindings: Env }>) {
   // SEED & HEALTH
   app.get('/api/seed', async (c) => {
@@ -31,5 +32,14 @@ export function userRoutes(app: Hono<{ Bindings: Env }>) {
     const business = await BusinessEntity.findBySlug(c.env, slug);
     if (!business) return notFound(c, 'Business profile not found');
     return ok(c, business);
+  });
+  // BLOG & EVENTS
+  app.get('/api/blog', (c) => ok(c, MOCK_BLOG_POSTS));
+  app.get('/api/events', (c) => ok(c, MOCK_EVENTS));
+  // SUBMISSIONS
+  app.post('/api/submissions', async (c) => {
+    const body = await c.req.json();
+    console.log('[SUBMISSION RECEIVED]', body);
+    return ok(c, { message: 'Application received successfully' });
   });
 }

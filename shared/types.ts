@@ -31,6 +31,33 @@ export interface Business {
   awardTitle?: string;
   awardReason?: string;
 }
+export interface BlogPost {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  image: string;
+}
+export interface LocalEvent {
+  id: string;
+  title: string;
+  date: string;
+  venue: string;
+  category: string;
+  description: string;
+  price: string;
+  image: string;
+}
+export interface BusinessSubmission {
+  businessName: string;
+  category: string;
+  email: string;
+  story: string;
+  website?: string;
+}
 export interface User {
   id: string;
   name: string;

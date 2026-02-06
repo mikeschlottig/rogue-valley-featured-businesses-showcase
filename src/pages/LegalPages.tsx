@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Star, Shield, Scale, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 const LegalLayout = ({ children, title, icon: Icon, description }: { children: React.ReactNode, title: string, icon: any, description: string }) => (
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="py-24 md:py-32">
@@ -25,9 +24,9 @@ const LegalLayout = ({ children, title, icon: Icon, description }: { children: R
 );
 export function AdvertisingPage() {
   return (
-    <LegalLayout
-      title="Partner with Us"
-      icon={Star}
+    <LegalLayout 
+      title="Partner with Us" 
+      icon={Star} 
       description="Elevate your brand with high-end editorial coverage in Southern Oregon's premier directory."
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 not-prose mb-16">
@@ -53,9 +52,7 @@ export function AdvertisingPage() {
                 </li>
               ))}
             </ul>
-            <Link to="/submit">
-              <Button className="w-full bg-rogue-green group-hover:bg-rogue-accent transition-colors py-6 rounded-xl">Inquire Now</Button>
-            </Link>
+            <Button className="w-full bg-rogue-green group-hover:bg-rogue-accent transition-colors py-6 rounded-xl">Inquire Now</Button>
           </div>
         ))}
       </div>
