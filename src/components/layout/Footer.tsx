@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Twitter, Instagram, Mail } from 'lucide-react';
+import { Github, Twitter, Instagram, Mail } from 'lucide-react';
 export function Footer() {
   return (
-    <footer className="bg-rogue-green text-paper-cream py-16 px-4 mt-auto">
+    <footer className="bg-rogue-green text-paper-cream py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           <div className="space-y-4">
@@ -39,9 +39,9 @@ export function Footer() {
             <h4 className="font-bold mb-4 uppercase text-xs tracking-widest text-rogue-accent">Newsletter</h4>
             <p className="text-sm text-paper-cream/70 mb-4">The best of the valley, delivered monthly.</p>
             <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="email@example.com"
+              <input 
+                type="email" 
+                placeholder="email@example.com" 
                 className="bg-white/10 border-white/20 rounded-lg px-4 py-2 text-sm w-full focus:outline-none focus:ring-1 focus:ring-rogue-accent"
               />
             </div>
