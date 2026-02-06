@@ -1,6 +1,6 @@
 # Cloudflare Workers + React Boilerplate
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/mikeschlottig/rogue-valley-featured-businesses-showcase)
 
 A production-ready full-stack boilerplate for building scalable applications on Cloudflare Workers. Features a React frontend with Shadcn UI and a Workers backend powered by Hono and a multi-entity Durable Objects pattern for efficient, scalable storage.
 
@@ -88,7 +88,7 @@ bun run deploy
 
 Or use the [Cloudflare dashboard](https://dash.cloudflare.com/) for direct upload.
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/mikeschlottig/rogue-valley-featured-businesses-showcase)
 
 **Production Notes**:
 - Assets auto-bundle to Workers.
